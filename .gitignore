@@ -1,0 +1,9 @@
+
+
+//Ignore filepaths
+.vs/
+rvg-containers-main/x64/Debug
+
+//File extension
+*.pdb
+*.user
