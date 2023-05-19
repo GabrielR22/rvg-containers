@@ -2,7 +2,7 @@
 
 //Ignore filepaths
 .vs/
-rvg-containers-main/x64/Debug
+rvg-containers-main/x64/
 
 //File extension
 *.pdb

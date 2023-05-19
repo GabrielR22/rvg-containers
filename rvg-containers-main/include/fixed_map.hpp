@@ -65,13 +65,13 @@ namespace rvg
 
 		//! Get last element.
 		constexpr Value& get_last_found() {
-			if (m_LastFind.has_value()) return m_LastFind.value();
+			if (m_LastFind.has_value()) return m_LastFind.value().get().second;
 			else throw std::out_of_range("you must use find or contains before calling get_last_found!");
 		};
 
 		//! Get last element (CONST).
 		constexpr const Value& get_last_found() const {
-			if (m_LastFind.has_value()) return m_LastFind.value();
+			if (m_LastFind.has_value()) return m_LastFind.value().get().second;
 			else throw std::out_of_range("you must use find or contains before calling get_last_found!");
 		};
 
@@ -145,7 +145,7 @@ namespace rvg
 			return nullptr;
 		}
 
-		constexpr void m_clear_last() const { m_LastFind = std::nullopt; };
+		constexpr void m_clear_last() const { m_LastFind.reset(); };
 		constexpr void m_set_last(const Type& el_) const { m_LastFind = const_cast<Type&>(el_); };
 
 		constexpr static void m_mark_used(Slot* sl_) { (*sl_).second = true; }
