@@ -65,7 +65,13 @@ namespace rvg
 
 		//! Get last element.
 		constexpr Value& get_last_found() {
-			if (m_LastFind.has_value()) return m_LastFind.get();
+			if (m_LastFind.has_value()) return m_LastFind.value();
+			else throw std::out_of_range("you must use find or contains before calling get_last_found!");
+		};
+
+		//! Get last element (CONST).
+		constexpr const Value& get_last_found() const {
+			if (m_LastFind.has_value()) return m_LastFind.value();
 			else throw std::out_of_range("you must use find or contains before calling get_last_found!");
 		};
 
