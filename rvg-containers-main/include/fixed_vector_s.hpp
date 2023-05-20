@@ -51,7 +51,7 @@ namespace rvg
 		//! constructs a vector with il list.
 		constexpr fixed_vector_s(std::initializer_list<T> list)
 		{
-			assert(list.size() && list.size() < Size);
+			//assert(list.size() && list.size() < Size);
 
 			//rvg -> improvement place?
 			size_t index = 0;

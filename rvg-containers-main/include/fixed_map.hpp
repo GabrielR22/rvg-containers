@@ -44,7 +44,7 @@ namespace rvg
 
 		constexpr fixed_map(std::initializer_list<Type> list)
 		{
-			assert(list.size() && list.size() < Size);
+			//assert(list.size() && list.size() < Size);
 
 			//rvg -> improvement place?
 			size_t index = 0;
@@ -137,7 +137,7 @@ namespace rvg
 			{
 				if (sl.second == false)
 				{
-					m_set_last(sl);
+					m_set_last(sl.first);
 					return &sl;
 				}
 			}

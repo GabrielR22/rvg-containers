@@ -24,7 +24,6 @@
 */
 
 //std::initializer_list
-#include <cassert>
 #include <utility>
 
 #include "internal/helper.h"
@@ -55,7 +54,7 @@ namespace rvg
 		//! constructs a vector with il list.
 		constexpr fixed_vector_c(std::initializer_list<type> list)
 		{
-			assert(list.size() && list.size() < Size);
+			//assert(list.size() && list.size() < Size);
 
 			memcpy_s(m_Data.data(), Size * sizeof(type), list.begin(), list.size() * sizeof(decltype(*list.begin())));
 
@@ -97,7 +96,7 @@ namespace rvg
 			if (const size_t index = m_find_slot(el_); index != rvg::internal::uint_upperbound)
 			{
 				const int cpy_amount = (m_CurSize-1) - index;
-				assert(cpy_amount > 0);
+				//assert(cpy_amount > 0);
 
 				const auto* wh = (&m_Data[index+1]);
 				memcpy(&m_Data[index],wh, cpy_amount * sizeof(type));
