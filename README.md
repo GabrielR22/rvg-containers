@@ -14,6 +14,12 @@ Classes like fixed_vector really shouldn't have any issues with bigger sizes, bu
 
 Feel free to contact me on discord Rovug#1023 for anything about the containers.
 
+**fixed-vector**\
+Extra memory usage is 2 bytes per element.\
+**fixed-map**\
+Extra memory usage is:
+> 2 bytes per element.\
+> One extra element + some bytes for std::optional<std::reference_wrapper<Type>> m_LastFind (not really sure how much the optional + reference occupies)
 
 ## (PT-BR / Google Translate) (not updated, just for intro to some br friends!)
 
