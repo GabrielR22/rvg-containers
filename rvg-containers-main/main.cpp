@@ -1,18 +1,46 @@
 
 #include <iostream>
 
+#include "utilities/Timer.h"
 
-
-//! containers include.
 #include <vector>
 
+//! containers include.
 #include "include/fixed_map.hpp"
-#include "include/fixed_vector.hpp"
+#include "include/fixed_vector_s.hpp"
+#include "include/fixed_vector_c.hpp"
 
 
-int main()
+void test_vect_c()
 {
 
+    rvg::fixed_vector_c<int, 10> vect;
+
+    vect.emplace(1);
+    vect.emplace(2);
+    vect.emplace(3);
+    vect.emplace(4);
+
+    for (const auto& el : vect)
+    {
+        std::cout << el << std::endl;
+    };
+
+    vect.erase(3);
+
+    for (const auto& el : vect)
+    {
+        std::cout << el << std::endl;
+    }
+}
+
+void test_vect_s()
+{
+    
+}
+
+void test_map()
+{
     enum type
     {
         t1 = 0,
@@ -27,32 +55,10 @@ int main()
     };
 
     rvg::fixed_map<type, test, 10> bb;
+}
 
-    //bb.get_last_found().a;
-
-    //auto a = bb.find(type::t1);
-
-    //auto b = bb.contains(type::t2);
-
-    rvg::fixed_vector<int, 10> vect;
-
-    int val = 5;
-    vect.emplace(val);
-    vect.emplace(1);
-
-    auto * el = vect.find(1);
-    
-    for(const auto & val : vect)
-    {
-        std::cout << val << std::endl;
-    }
-
-    std::vector<int> stdvect;
-
-    stdvect.emplace_back(1);
-    stdvect.emplace_back(val);
-
-
+int main()
+{
 
 	std::cin.get();
 }
