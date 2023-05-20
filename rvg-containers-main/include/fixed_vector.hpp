@@ -26,36 +26,97 @@
 //std::initializer_list
 #include <utility>
 
+#include "internal/iterator.h"
+
 namespace rvg
 {
+	
+
 	template <typename T, size_t Size>
 	class fixed_vector
 	{
-	public:
-		//static_vector() = default;
+	private:
 
+		//A Slot has the value + a bool to control if its being used.
+		using Slot = std::pair<T, bool>;
+
+		//Slot iterator
+		using it_slot = rvg::internal::Iterator<Slot, T>;
+
+	public:
+
+		constexpr fixed_vector() = default;
+
+		//! constructs a vector with il list.
 		constexpr fixed_vector(std::initializer_list<T> list)
 		{
-			assert(list.size());
+			assert(list.size() && list.size() < Size);
 
-			memcpy_s(m_Data.data(), Size * sizeof(T), list.begin(), list.size() * sizeof(decltype(*list.begin())));
+			//rvg -> improvement place?
+			size_t index = 0;
+			for (auto it = list.begin(), end = list.end(); it < end; ++it, ++index)
+			{
+				m_Data[index].first = *it;
+				m_mark_used(&m_Data[index]);
+			}
+
+			//before used.
+			//memcpy_s(m_Data.data(), Size * sizeof(T), list.begin(), list.size() * sizeof(decltype(*list.begin())));
 		};
 
-		T& GetData() { return m_Data; };
+		//! Gets the data inside this vector.
+		constexpr T& GetData() { return m_Data; };
 
-		T* find(const T& el_)
+		constexpr T* find(const T& el_)
 		{
-			for (auto& el : m_Data)
+			for (auto& [val, used] : m_Data)
 			{
-				if (el == el_)
-					return &el;
+				if (used && val == el_)
+					return &val;
 			}
 
 			return nullptr;
 		}
 
+		//! Creates a begin iterator
+		it_slot begin() { return it_slot(m_Data.data(), &m_Data[Size - 1]); }
+		//! End is just a nullptr;
+		it_slot end()  { return it_slot(nullptr, &m_Data[Size - 1]); }
+	
+		//! Emplaces a value if there is an slot.
+		// <success> can fail if vector is full </success>
+		// <returns> a pointer to the element if emplace was valid </returns>
+		constexpr T* emplace(T&& el) { return m_emplace(std::move(el)); }
+		constexpr T* emplace(T& el)  { return m_emplace(std::move(el)); }
+
 	private:
-		std::array<T, Size> m_Data{};
+		constexpr T* m_emplace(T&& el)
+		{
+			if (auto* sl = m_get_first_empty())
+			{
+				sl->first = el;
+				m_mark_used(sl);
+				return &sl->first;
+			}
+
+			return nullptr;
+		}
+
+		constexpr static void m_mark_used(Slot* sl_) { (*sl_).second = true; }
+		constexpr static void m_mark_unused(Slot* sl_) { (*sl_).second = false; }
+
+		constexpr Slot* m_get_first_empty()
+		{
+			for (auto& sl : m_Data)
+			{
+				if (!sl.second)
+					return &sl;
+			}
+
+			return nullptr;
+		}
+	private:
+		std::array<Slot, Size> m_Data{};
 	};
 
 	template <class First, class... Rest>
