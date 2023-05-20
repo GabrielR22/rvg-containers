@@ -24,6 +24,7 @@
 */
 
 //std::initializer_list
+#include <cassert>
 #include <utility>
 
 #include "internal/helper.h"
@@ -35,9 +36,6 @@ namespace rvg
 	class fixed_vector_c
 	{
 	private:
-
-		//A Slot has the value + a bool to control if its being used.
-		//using Slot = std::pair<T, bool>;
 
 		using type = T;
 		using type_ptr = T*;
@@ -54,6 +52,7 @@ namespace rvg
 		//! constructs a vector with il list.
 		constexpr fixed_vector_c(std::initializer_list<type> list)
 		{
+			static_assert(Size < internal::uint_upperbound);
 			//assert(list.size() && list.size() < Size);
 
 			memcpy_s(m_Data.data(), Size * sizeof(type), list.begin(), list.size() * sizeof(decltype(*list.begin())));
@@ -62,14 +61,19 @@ namespace rvg
 		};
 
 		//! Gets the data inside this vector.
-		//constexpr T& data() { return m_Data.data(); };
+		constexpr T& data() { return m_Data.data(); };
 
+		//! Finds an element inside this class.
 		constexpr type_ptr find(c_type_ref el_)
 		{
+			size_t ind = 0;
 			for (auto& el : m_Data)
 			{
 				if (el == el_)
 					return &el;
+
+				if (++ind > m_CurSize)
+					break;
 			}
 
 			return nullptr;
@@ -78,7 +82,7 @@ namespace rvg
 		//! Creates a begin iterator
 		it_slot begin() { return it_slot(m_Data.data(), &m_Data[Size - 1]); }
 		//! End is just a nullptr;
-		it_slot end() { return it_slot( m_CurSize == m_Data.size() ? nullptr : &m_Data[m_CurSize], &m_Data[Size - 1]); }
+		it_slot end() { return it_slot(m_CurSize == m_Data.size() ? nullptr : &m_Data[m_CurSize], &m_Data[Size - 1]); }
 
 		//! Emplaces a value if there is an slot.
 		// <success> can fail if vector is full </success>
@@ -95,13 +99,13 @@ namespace rvg
 		{
 			if (const size_t index = m_find_slot(el_); index != rvg::internal::uint_upperbound)
 			{
-				const int cpy_amount = (m_CurSize-1) - index;
+				const int cpy_amount = (m_CurSize - 1) - index;
 				//assert(cpy_amount > 0);
 
-				const auto* wh = (&m_Data[index+1]);
-				memcpy(&m_Data[index],wh, cpy_amount * sizeof(type));
+				const auto* wh = (&m_Data[index + 1]);
+				memcpy(&m_Data[index], wh, cpy_amount * sizeof(type));
 
-				memset(&m_Data[m_CurSize-1], 0, sizeof(type));
+				memset(&m_Data[m_CurSize - 1], 0, sizeof(type));
 
 				--m_CurSize;
 
@@ -119,13 +123,6 @@ namespace rvg
 				return &el;
 			}
 
-			//if (auto* sl = m_get_first_empty())
-			//{
-			//	sl = el;
-			//	m_CurSize++;
-			//	return &sl;
-			//}
-
 			return nullptr;
 		}
 
@@ -137,22 +134,9 @@ namespace rvg
 					return index;
 			}
 
-			return -1;
+			return internal::uint_upperbound;
 		}
 
-		//constexpr static void m_mark_used(Slot* sl_) { (*sl_).second = true; }
-		//constexpr static void m_mark_unused(Slot* sl_) { (*sl_).second = false; }
-
-		constexpr T* m_get_first_empty()
-		{
-			for (auto& sl : m_Data)
-			{
-				if (!sl.second)
-					return &sl;
-			}
-
-			return nullptr;
-		}
 	private:
 		std::array<T, Size> m_Data{};
 
