@@ -76,6 +76,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="include\fixed_map.hpp" />
     <ClInclude Include="include\fixed_vector.hpp" />
+    <ClInclude Include="include\internal\iterator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

@@ -21,6 +21,9 @@
     <ClInclude Include="include\fixed_vector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\internal\iterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
