@@ -40,6 +40,8 @@ int main()
     vect.emplace(val);
     vect.emplace(1);
 
+    auto * el = vect.find(1);
+    
     for(const auto & val : vect)
     {
         std::cout << val << std::endl;
