@@ -2,7 +2,7 @@
 
 Welcome to rvg-containers, a fixed container repo with header only implementation.
 
-This is a repo about fixed containers, it is made to be used in a game engine that I work and at the moment is very work in progress.
+This is a repo about fixed containers, its very work in progress and it is made to be used in a game engine that I work and at the moment.
 
 It's not made to follow any standards or how mostly code, I will try be the most consistent possible but will adapt as I need (and learn more).
 
