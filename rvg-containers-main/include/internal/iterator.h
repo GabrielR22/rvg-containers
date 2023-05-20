@@ -14,10 +14,10 @@ namespace rvg::internal
 		using pointer = Slot*;  // or also value_type*
 		using reference = Slot&;  // or also value_type&
 
+		//creates the iterator with a ptr to the data and the last element
+		Iterator(pointer ptr, pointer end) : m_ptr(ptr), m_data_last_el(end) {}
 
-		Iterator(pointer ptr, pointer end) : m_ptr(ptr), m_data_end(end) {}
-
-		// Iterator constructors here...
+		// Iterator accessors
 		T& operator*() const { return (*m_ptr).first; }
 		T* operator->() { return (m_ptr)->first; }
 
@@ -28,18 +28,18 @@ namespace rvg::internal
 			++m_ptr;
 
 			//If we reached end, just skip.
-			while (m_ptr != m_data_end)
+			while (m_ptr != m_data_last_el)
 			{
 				//Break the loop if the element is valid
 				if ((m_ptr)->second)
 					break;
 
-				++m_ptr;// = m_ptr + (sizeof(Slot));
+				++m_ptr;
 			}
 
-			if (m_ptr == (m_data_end))
+			//If we rechead the end, mark as so.
+			if (m_ptr == (m_data_last_el))
 				m_ptr = nullptr;
-			//return (++m_data_end);
 
 			return *this;
 		}
@@ -54,6 +54,6 @@ namespace rvg::internal
 	private:
 
 		pointer m_ptr;
-		pointer m_data_end;
+		pointer m_data_last_el;
 	};
 }
