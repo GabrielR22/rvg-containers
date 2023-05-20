@@ -4,7 +4,7 @@ Welcome to rvg-fixed-containers, a fixed container repo with header only impleme
 
 This is a repo about fixed containers, its very work in progress and it is made to be used in a game engine that I work and at the moment.
 
-It's not made to follow any standards or how mostly code, I will try be the most consistent possible but will adapt as I need (and learn more).
+It's not made to follow any standards, I will try be the most consistent possible but will adapt as needed (and learn more).
 
 I plan to move to a different build system (well we really not need a build system, but at the moment it's easier for me to test in this sandbox app) in the future (still need to learn them).
 
@@ -13,14 +13,6 @@ This containers focus is lower sized containers (10000-).
 Classes like fixed_vector really shouldn't have any issues with bigger sizes, but classes like fixed_map implement the map in a vector style with linear search, which will perform worse in larger size compared to a implementation like std::unordered_map (find/erase), while should give way better performance while iterating.
 
 Feel free to contact me on discord Rovug#1023 for anything about the containers.
-
-**fixed-vector**\
-Extra memory usage is 2 bytes per element.\
-**fixed-map**\
-Extra memory usage is:
-> 2 bytes per element.\
-> One extra element + some bytes for std::optional<std::reference_wrapper<Type>> m_LastFind (not really sure how much the optional + reference occupies)
-
 ## (PT-BR / Google Translate) (not updated, just for intro to some br friends!)
 
 Bem-vindo ao rvg-containers, um repositório de contêiner fixo com implementação somente de cabeçalho.
