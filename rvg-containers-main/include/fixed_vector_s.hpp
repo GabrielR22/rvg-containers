@@ -34,7 +34,7 @@ namespace rvg
 	
 
 	template <typename T, size_t Size>
-	class fixed_vector
+	class fixed_vector_s
 	{
 	private:
 
@@ -46,10 +46,10 @@ namespace rvg
 
 	public:
 
-		constexpr fixed_vector() = default;
+		constexpr fixed_vector_s() = default;
 
 		//! constructs a vector with il list.
-		constexpr fixed_vector(std::initializer_list<T> list)
+		constexpr fixed_vector_s(std::initializer_list<T> list)
 		{
 			assert(list.size() && list.size() < Size);
 
@@ -90,7 +90,28 @@ namespace rvg
 		constexpr T* emplace(T&& el) { return m_emplace(std::move(el)); }
 		constexpr T* emplace(T& el)  { return m_emplace(std::move(el)); }
 
+		constexpr bool erase(const T&& el_)
+		{
+			if (auto* sl = m_find_slot(el_))
+			{
+				m_mark_unused(std::move(sl));
+				return true;
+			}
+			return false;
+		}
+
 	private:
+
+		constexpr Slot* m_find_slot(const T& el_)
+		{
+			for (auto& sl : m_Data)
+			{
+				if (sl.first == el_)
+					return &sl;
+			}
+
+			return nullptr;
+		}
 		constexpr T* m_emplace(T&& el)
 		{
 			if (auto* sl = m_get_first_empty())
@@ -123,5 +144,5 @@ namespace rvg
 
 
 	template <class First, class... Rest>
-	fixed_vector(First, Rest...) -> fixed_vector<typename internal::Enforce_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
+	fixed_vector_s(First, Rest...) -> fixed_vector_s<typename internal::Enforce_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
 }
