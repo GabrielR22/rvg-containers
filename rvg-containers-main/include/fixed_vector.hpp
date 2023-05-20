@@ -65,7 +65,7 @@ namespace rvg
 		};
 
 		//! Gets the data inside this vector.
-		constexpr T& GetData() { return m_Data; };
+		//constexpr T& data() { return m_Data.data(); };
 
 		constexpr T* find(const T& el_)
 		{
