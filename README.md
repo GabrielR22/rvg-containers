@@ -9,7 +9,8 @@ It's not made to follow any standards or how mostly code, I will try be the most
 I plan to move to a different build system (well we really not need a build system, but at the moment it's easier for me to test in this sandbox app) in the future (still need to learn them).
 
 The main purpose is simple of use AND SPEED, memory usage might be a bit higher (not much). 
-This containers focus is lower sized containers (10000-). 
+This containers focus is lower sized containers (10000-).
+Classes like fixed_vector really shouldn't have any issues with bigger sizes, but classes like fixed_map implement the map in a vector style with linear search, which will perform worse in larger size compared to a implementation like std::unordered_map (find/erase), while should give way better performance while iterating.
 
 Feel free to contact me on discord Rovug#1023 for anything about the containers.
 
