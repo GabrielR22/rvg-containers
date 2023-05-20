@@ -18,15 +18,30 @@
     <ClInclude Include="include\fixed_map.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\fixed_vector.hpp">
+    <ClInclude Include="include\fixed_vector_s.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\internal\iterator.h">
+    <ClInclude Include="include\internal\iterator_s.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fixed_vector_c.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\internal\iterator_c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\internal\helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
