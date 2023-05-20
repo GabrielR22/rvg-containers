@@ -27,7 +27,7 @@
 namespace rvg::internal
 {
 	template <typename Slot, typename T>
-	struct Iterator
+	struct Iterator_s
 	{
 		// Iterator tags here...
 		using iterator_category = std::forward_iterator_tag;
@@ -37,14 +37,14 @@ namespace rvg::internal
 		using reference = Slot&;  // or also value_type&
 
 		//creates the iterator with a ptr to the data and the last element
-		Iterator(pointer ptr, pointer end) : m_ptr(ptr), m_data_last_el(end) {}
+		Iterator_s(pointer ptr, pointer end) : m_ptr(ptr), m_data_last_el(end) {}
 
 		// Iterator accessors
 		T& operator*() const { return (*m_ptr).first; }
 		T* operator->() { return (m_ptr)->first; }
 
 		// Prefix increment
-		Iterator& operator++()
+		Iterator_s& operator++()
 		{
 			//Increment
 			++m_ptr;
@@ -69,8 +69,8 @@ namespace rvg::internal
 		// Postfix increment
 		//Iterator operator++(int) { Iterator tmp = *this; ++(*this); return tmp; }
 
-		friend bool operator== (const Iterator& a, const Iterator& b) { return a.m_ptr == b.m_ptr; };
-		friend bool operator!= (const Iterator& a, const Iterator& b) { return a.m_ptr != b.m_ptr; };
+		friend bool operator== (const Iterator_s& a, const Iterator_s& b) { return a.m_ptr == b.m_ptr; };
+		friend bool operator!= (const Iterator_s& a, const Iterator_s& b) { return a.m_ptr != b.m_ptr; };
 
 
 	private:
