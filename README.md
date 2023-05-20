@@ -1,6 +1,6 @@
-# rvg-containers
+# rvg-fixed-containers
 
-Welcome to rvg-containers, a fixed container repo with header only implementation.
+Welcome to rvg-fixed-containers, a fixed container repo with header only implementation.
 
 This is a repo about fixed containers, its very work in progress and it is made to be used in a game engine that I work and at the moment.
 
