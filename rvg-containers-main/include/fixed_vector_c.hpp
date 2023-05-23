@@ -44,6 +44,7 @@ namespace rvg
 
 		//Slot iterator
 		using it_slot = rvg::internal::Iterator_c<type>;
+		using c_it_slot = rvg::internal::Iterator_c<const type>;
 
 	public:
 
@@ -53,15 +54,19 @@ namespace rvg
 		constexpr fixed_vector_c(std::initializer_list<type> list)
 		{
 			static_assert(Size < internal::uint_upperbound);
-			//assert(list.size() && list.size() < Size);
+			for(const auto & el : list)
+			{
+				m_Data[m_CurSize] = el;
+				m_CurSize++;
+			}
 
-			memcpy_s(m_Data.data(), Size * sizeof(type), list.begin(), list.size() * sizeof(decltype(*list.begin())));
+			//std::memcpy(&m_Data[0], list.begin(), Size * sizeof(type));
 
-			m_CurSize = list.size();
+			//m_CurSize = list.size();
 		};
 
 		//! Gets the data inside this vector.
-		constexpr T& data() { return m_Data.data(); };
+		constexpr T* data() { return m_Data.data(); };
 
 		//! Finds an element inside this class.
 		constexpr type_ptr find(c_type_ref el_)
@@ -83,6 +88,10 @@ namespace rvg
 		it_slot begin() { return it_slot(m_Data.data(), &m_Data[Size - 1]); }
 		//! End is just a nullptr;
 		it_slot end() { return it_slot(m_CurSize == m_Data.size() ? nullptr : &m_Data[m_CurSize], &m_Data[Size - 1]); }
+			//! Creates a begin iterator
+		c_it_slot begin() const { return c_it_slot(m_Data.data(), &m_Data[Size - 1]); }
+		//! End is just a nullptr;
+		c_it_slot end() const { return c_it_slot(m_CurSize == m_Data.size() ? nullptr : &m_Data[m_CurSize], &m_Data[Size - 1]); }
 
 		//! Emplaces a value if there is an slot.
 		// <success> can fail if vector is full </success>
