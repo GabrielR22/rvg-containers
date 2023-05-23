@@ -85,13 +85,13 @@ namespace rvg
 		}
 
 		//! Creates a begin iterator
-		it_slot begin() { return it_slot(m_Data.data(), &m_Data[Size - 1]); }
+		it_slot begin() { return it_slot(m_Data.data()); }
 		//! End is just a nullptr;
-		it_slot end() { return it_slot(m_CurSize == m_Data.size() ? nullptr : &m_Data[m_CurSize], &m_Data[Size - 1]); }
+		it_slot end() { return it_slot(m_CurSize == m_Data.size() ? nullptr : &m_Data[m_CurSize]); }
 			//! Creates a begin iterator
-		c_it_slot begin() const { return c_it_slot(m_Data.data(), &m_Data[Size - 1]); }
+		c_it_slot begin() const { return c_it_slot(m_Data.data()); }
 		//! End is just a nullptr;
-		c_it_slot end() const { return c_it_slot(m_CurSize == m_Data.size() ? nullptr : &m_Data[m_CurSize], &m_Data[Size - 1]); }
+		c_it_slot end() const { return c_it_slot(m_CurSize == m_Data.size() ? nullptr : &m_Data[m_CurSize]); }
 
 		//! Emplaces a value if there is an slot.
 		// <success> can fail if vector is full </success>

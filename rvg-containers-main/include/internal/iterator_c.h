@@ -32,50 +32,33 @@ namespace rvg::internal
 		// Iterator tags here...
 		using iterator_category = std::forward_iterator_tag;
 		using difference_type = std::ptrdiff_t;
-		using value_type = T;
-		using pointer = T*;  // or also value_type*
-		using reference = T&;  // or also value_type&
+
+		using type = T;
+		using type_ptr = T*;
+		using type_ref = T&;
+
+		using c_type = const T;
+		using c_type_ptr = const T*;
+		using c_type_ref = const T&;
 
 		//creates the iterator with a ptr to the data and the last element
-		constexpr Iterator_c(pointer ptr, pointer end) : m_ptr(ptr), m_data_last_el(end) {}
+		constexpr Iterator_c(type_ptr ptr) : m_ptr(ptr) {}
 
 		// Iterator accessors
 		constexpr T& operator*() const { return (*m_ptr); }
 		constexpr T* operator->() { return (m_ptr); }
 
 		// Prefix increment
-		constexpr Iterator_c& operator++()
-		{
-			//Increment
-			++m_ptr;
-
-			//If we reached end, just skip.
-			//while (m_ptr != m_data_last_el)
-			//{
-			//	//Break the loop if the element is valid
-			//	if ((m_ptr)->second)
-			//		break;
-			//
-			//	++m_ptr;
-			//}
-
-			//If we rechead the end, mark as so.
-			//if (m_ptr == (m_data_last_el))
-			//	m_ptr = nullptr;
-
-			return *this;
-		}
+		constexpr Iterator_c& operator++() { ++m_ptr; 			return *this; }
 
 		// Postfix increment
-		//Iterator operator++(int) { Iterator tmp = *this; ++(*this); return tmp; }
+		constexpr Iterator_c operator++(int) { Iterator_c tmp = *this; ++(*this); return tmp; }
 
 		constexpr friend bool operator== (const Iterator_c& a, const Iterator_c& b) { return a.m_ptr == b.m_ptr; };
 		constexpr friend bool operator!= (const Iterator_c& a, const Iterator_c& b) { return a.m_ptr != b.m_ptr; };
 
-
 	private:
 
-		pointer m_ptr;
-		pointer m_data_last_el;
+		type_ptr m_ptr;
 	};
 }
