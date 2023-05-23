@@ -37,14 +37,14 @@ namespace rvg::internal
 		using reference = T&;  // or also value_type&
 
 		//creates the iterator with a ptr to the data and the last element
-		Iterator_c(pointer ptr, pointer end) : m_ptr(ptr), m_data_last_el(end) {}
+		constexpr Iterator_c(pointer ptr, pointer end) : m_ptr(ptr), m_data_last_el(end) {}
 
 		// Iterator accessors
-		T& operator*() const { return (*m_ptr); }
-		T* operator->() { return (m_ptr); }
+		constexpr T& operator*() const { return (*m_ptr); }
+		constexpr T* operator->() { return (m_ptr); }
 
 		// Prefix increment
-		Iterator_c& operator++()
+		constexpr Iterator_c& operator++()
 		{
 			//Increment
 			++m_ptr;
@@ -69,8 +69,8 @@ namespace rvg::internal
 		// Postfix increment
 		//Iterator operator++(int) { Iterator tmp = *this; ++(*this); return tmp; }
 
-		friend bool operator== (const Iterator_c& a, const Iterator_c& b) { return a.m_ptr == b.m_ptr; };
-		friend bool operator!= (const Iterator_c& a, const Iterator_c& b) { return a.m_ptr != b.m_ptr; };
+		constexpr friend bool operator== (const Iterator_c& a, const Iterator_c& b) { return a.m_ptr == b.m_ptr; };
+		constexpr friend bool operator!= (const Iterator_c& a, const Iterator_c& b) { return a.m_ptr != b.m_ptr; };
 
 
 	private:
