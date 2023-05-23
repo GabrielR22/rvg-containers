@@ -4,6 +4,7 @@
 .vs/
 rvg-containers-main/x64/
 rvg-containers-main/Debug/
+rvg-containers-main/Release/
 Debug/
 
 //File extension
@@ -11,3 +12,4 @@ Debug/
 *.user
 
 
+rvg-containers-main/Release/rvg-cont.3716add6.tlog/CL.command.1.tlog
