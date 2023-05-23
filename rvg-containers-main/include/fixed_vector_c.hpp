@@ -40,7 +40,7 @@ namespace rvg
 		using type = T;
 		using type_ptr = T*;
 		using type_ref = T&;
-		using c_type_ref = T&;
+		using c_type_ref = const T&;
 
 		//Slot iterator
 		using it_slot = rvg::internal::Iterator_c<type>;
