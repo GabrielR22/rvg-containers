@@ -6,6 +6,7 @@ rvg-containers-main/x64/
 rvg-containers-main/Debug/
 rvg-containers-main/Release/
 Debug/
+Release/
 
 //File extension
 *.pdb

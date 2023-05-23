@@ -92,6 +92,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +139,7 @@
     <ClInclude Include="include\internal\helper.h" />
     <ClInclude Include="include\internal\iterator_c.h" />
     <ClInclude Include="include\internal\iterator_s.h" />
+    <ClInclude Include="utilities\fixed_string.hpp" />
     <ClInclude Include="utilities\Timer.h" />
   </ItemGroup>
   <ItemGroup>
