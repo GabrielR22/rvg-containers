@@ -29,15 +29,13 @@
 #include "internal/helper.h"
 #include "internal/iterator_s.h"
 
-namespace rvg
-{
-	
 
+namespace rvg::obsolete
+{
 	template <typename T, size_t Size>
 	class fixed_vector_s
 	{
 	private:
-
 		//A Slot has the value + a bool to control if its being used.
 		using Slot = std::pair<T, bool>;
 
@@ -45,7 +43,6 @@ namespace rvg
 		using it_slot = rvg::internal::Iterator_s<Slot, T>;
 
 	public:
-
 		constexpr fixed_vector_s() = default;
 
 		//! constructs a vector with il list.
@@ -82,13 +79,13 @@ namespace rvg
 		//! Creates a begin iterator
 		it_slot begin() { return it_slot(m_Data.data(), &m_Data[Size - 1]); }
 		//! End is just a nullptr;
-		it_slot end()  { return it_slot(nullptr, &m_Data[Size - 1]); }
-	
+		it_slot end() { return it_slot(nullptr, &m_Data[Size - 1]); }
+
 		//! Emplaces a value if there is an slot.
 		// <success> can fail if vector is full </success>
 		// <returns> a pointer to the element if emplace was valid </returns>
 		constexpr T* emplace(T&& el) { return m_emplace(std::move(el)); }
-		constexpr T* emplace(T& el)  { return m_emplace(std::move(el)); }
+		constexpr T* emplace(T& el) { return m_emplace(std::move(el)); }
 
 		constexpr bool erase(const T&& el_)
 		{
@@ -101,7 +98,6 @@ namespace rvg
 		}
 
 	private:
-
 		constexpr Slot* m_find_slot(const T& el_)
 		{
 			for (auto& sl : m_Data)
@@ -112,6 +108,7 @@ namespace rvg
 
 			return nullptr;
 		}
+
 		constexpr T* m_emplace(T&& el)
 		{
 			if (auto* sl = m_get_first_empty())
@@ -137,12 +134,13 @@ namespace rvg
 
 			return nullptr;
 		}
+
 	private:
 		std::array<Slot, Size> m_Data{};
 	};
 
 
-
 	template <class First, class... Rest>
-	fixed_vector_s(First, Rest...) -> fixed_vector_s<typename internal::Enforce_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
+	fixed_vector_s(
+		First, Rest...) -> fixed_vector_s<typename rvg::internal::Enforce_same<First, Rest...>::type, 1 + sizeof...(Rest)>;
 }

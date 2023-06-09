@@ -33,8 +33,7 @@ void test_vect_c()
 }
 
 void test_vect_s()
-{
-}
+{}
 
 void test_map()
 {
@@ -83,23 +82,35 @@ int main()
 	T.printMICROS();
 	T.reset();
 
-	constexpr rvg::fixed_vector_c<fss::fixed_size_str<128>, 20> fts
+	std::vector std
+	{
+		"Hello!",
+		"Hi!",
+	};
+	//fss::fixed_size_str<128>
+
+
+	constexpr rvg::fixed_vector_c fts
 	{
 		"game\\fonts\\Frutiger.ttf",
-			"game\\fonts\\NotoSans-Regular.ttf",
-			"game\\fonts\\Bellefair-Regular.ttf",
-			"game\\fonts\\Philosopher-Regular.ttf",
-			"game\\fonts\\Philosopher-Bold.ttf",
-			"game\\fonts\\oxygen.regular.ttf",
-			"game\\fonts\\Lora-Regular.ttf",
-			"game\\fonts\\Exo2-Regular.ttf",
-			"game\\fonts\\Exo2-SemiBold.otf",
-			"game\\fonts\\test\\Asap-Regular.ttf",
-			"game\\fonts\\test\\Cabin-Regular.ttf",
-			"game\\fonts\\test\\PTSans-Regular.ttf",
-			"game\\fonts\\test\\PublicSans-Regular.ttf",
-			"game\\fonts\\test\\Ubuntu-Regular.ttf",
+		"game\\fonts\\NotoSans-Regular.ttf",
+		"game\\fonts\\Bellefair-Regular.ttf",
+		"game\\fonts\\Philosopher-Regular.ttf",
+		"game\\fonts\\Philosopher-Bold.ttf",
+		"game\\fonts\\oxygen.regular.ttf",
+		"game\\fonts\\Lora-Regular.ttf",
+		"game\\fonts\\Exo2-Regular.ttf",
+		"game\\fonts\\Exo2-SemiBold.otf",
+		"game\\fonts\\test\\Asap-Regular.ttf",
+		"game\\fonts\\test\\Cabin-Regular.ttf",
+		"game\\fonts\\test\\PTSans-Regular.ttf",
+		"game\\fonts\\test\\PublicSans-Regular.ttf",
+		"game\\fonts\\test\\Ubuntu-Regular.ttf"
+
 	};
+
+
+	auto a = fts.begin();
 
 	for (const auto& font : fts)
 	{

@@ -129,7 +129,7 @@ namespace rvg
             if (m_CurSize < Size)
             {
                 auto& slot = m_Data[m_CurSize];
-                slot = el;
+                slot       = el;
                 m_CurSize++;
                 return &slot;
             }
